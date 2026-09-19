@@ -7,14 +7,15 @@
     android:orientation="vertical"
     android:padding="20dp">
 
-    <!-- Bulk Selection Header -->
+    <!-- Bulk Selection Header (Hidden by default, shown on long press) -->
     <LinearLayout
         android:id="@+id/layoutBulkHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <CheckBox
             android:id="@+id/chkSelectAll"

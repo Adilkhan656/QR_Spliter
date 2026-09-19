@@ -78,7 +78,7 @@ class PaymentDetailsFragment : Fragment() {
                 viewModel.sessionFlow.collect { session ->
                     session?.let {
                         binding.tvMerchantName.text = it.merchantName
-                        binding.chipStatus.text = it.status.name
+                        binding.chipStatus.text = it.status.displayName
                         binding.tvTotalAmount.text = it.totalAmount.formattedRupees
                         binding.tvPaidProgress.text = "Paid: ${it.paidAmount.formattedRupees} / Remaining: ${it.remainingAmount.formattedRupees}"
                         binding.tvVpa.text = "UPI ID: ${it.merchantVpa}"
@@ -87,7 +87,7 @@ class PaymentDetailsFragment : Fragment() {
                         adapter.submitList(it.parts)
 
                         // Set Top App Bar Subtitle with Session Status
-                        (activity as? MainActivity)?.setToolbarSubtitle("Status: ${it.status.name}")
+                        (activity as? MainActivity)?.setToolbarSubtitle("Status: ${it.status.displayName}")
                     }
                 }
             }

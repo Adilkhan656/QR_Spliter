@@ -2,6 +2,7 @@ package com.qrspliter.adil.presentation.qr
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -12,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -146,10 +148,22 @@ class PaymentQrFragment : Fragment() {
                                 binding.tvMerchantDetails.text = "Merchant: ${state.session.merchantName} (${state.session.merchantVpa})"
                                 binding.tvReference.text = "Ref: ${part.clientReference}"
                                 binding.ivQrCode.setImageBitmap(state.qrBitmap)
-                                binding.chipStatus.text = part.status.name
+
+                                val (fgColorRes, bgColorRes) = when (part.status) {
+                                    PaymentPartStatus.USER_REPORTED_PAID, PaymentPartStatus.VERIFIED -> R.color.status_paid_fg to R.color.status_paid_bg
+                                    PaymentPartStatus.CANCELLED, PaymentPartStatus.FAILED -> R.color.status_cancelled_fg to R.color.status_cancelled_bg
+                                    else -> R.color.status_pending_fg to R.color.status_pending_bg
+                                }
+
+                                binding.chipStatus.apply {
+                                    text = part.status.displayName
+                                    setTextColor(ContextCompat.getColor(requireContext(), fgColorRes))
+                                    chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), bgColorRes))
+                                    chipStrokeColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), fgColorRes))
+                                }
 
                                 // Set Top App Bar Subtitle with Session Status
-                                (activity as? MainActivity)?.setToolbarSubtitle("Status: ${state.session.status.name}")
+                                (activity as? MainActivity)?.setToolbarSubtitle("Status: ${state.session.status.displayName}")
 
                                 binding.cardQr.setOnClickListener {
                                     showEnlargedQrDialog(part.amount.formattedRupees, state.qrBitmap)

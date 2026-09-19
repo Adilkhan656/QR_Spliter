@@ -1,13 +1,17 @@
 package com.qrspliter.adil.presentation.history
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.qrspliter.adil.R
 import com.qrspliter.adil.databinding.ItemPaymentSessionBinding
 import com.qrspliter.adil.domain.model.PaymentSession
+import com.qrspliter.adil.domain.model.PaymentSessionStatus
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -65,12 +69,25 @@ class HistoryAdapter(
         private val dateFormat = SimpleDateFormat("dd MMM yyyy, hh:mm a", Locale.US)
 
         fun bind(session: PaymentSession) {
+            val context = binding.root.context
             binding.tvMerchantName.text = session.merchantName
             binding.tvDate.text = dateFormat.format(Date(session.createdAt))
             binding.tvTotalAmount.text = session.totalAmount.formattedRupees
             binding.tvPaidProgress.text = "${session.paidAmount.formattedRupees} paid / ${session.totalAmount.formattedRupees}"
             binding.tvPartsConfirmed.text = "${session.paidPartsCount} / ${session.totalPartsCount} parts confirmed"
-            binding.chipSessionStatus.text = session.status.name
+
+            val (fgColorRes, bgColorRes) = when (session.status) {
+                PaymentSessionStatus.PAID -> R.color.status_paid_fg to R.color.status_paid_bg
+                PaymentSessionStatus.CANCELLED -> R.color.status_cancelled_fg to R.color.status_cancelled_bg
+                PaymentSessionStatus.PENDING, PaymentSessionStatus.PARTIALLY_PAID -> R.color.status_pending_fg to R.color.status_pending_bg
+            }
+
+            binding.chipSessionStatus.apply {
+                text = session.status.displayName
+                setTextColor(ContextCompat.getColor(context, fgColorRes))
+                chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(context, bgColorRes))
+                chipStrokeColor = ColorStateList.valueOf(ContextCompat.getColor(context, fgColorRes))
+            }
 
             // Unread / NEW badge
             if (!session.isRead) {
@@ -94,6 +111,18 @@ class HistoryAdapter(
                     selectedSessionIds.remove(session.sessionId)
                 }
                 onSelectionChanged(selectedSessionIds.size)
+            }
+
+            binding.root.setOnLongClickListener {
+                if (!isSelectionMode) {
+                    isSelectionMode = true
+                    selectedSessionIds.add(session.sessionId)
+                    notifyDataSetChanged()
+                    onSelectionChanged(selectedSessionIds.size)
+                    true
+                } else {
+                    false
+                }
             }
 
             binding.root.setOnClickListener {

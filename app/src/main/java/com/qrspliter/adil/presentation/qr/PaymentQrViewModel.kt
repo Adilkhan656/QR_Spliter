@@ -108,6 +108,7 @@ class PaymentQrViewModel(
                 status = PaymentPartStatus.USER_REPORTED_PAID,
                 paidAt = System.currentTimeMillis()
             )
+            nextPart()
         }
     }
 

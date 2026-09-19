@@ -1,4 +1,4 @@
-# Built files
+# Built files & Outputs
 *.apk
 *.aar
 *.aab
@@ -6,27 +6,39 @@
 *.class
 /build
 app/build
+output-metadata.json
+**/release/
 
-# Local configuration files
+# Local configuration & environment secrets
 local.properties
 google-services.json
+local.env
+.env
+signing.properties
 
 # Security & Signing keys
 *.jks
 *.keystore
+*.ks
 *.key
 *.pem
 *.p12
+*.pk8
+*.bks
 
-# Gradle files
+# Gradle files & cache
 .gradle/
 .gradle
 gradle-app.setting
+*.log
 
-# IDE files
+# IDE & OS files
 .idea/
 *.iml
 .DS_Store
+Thumbs.db
 /captures
 .externalNativeBuild
 .cxx
+.artifacts/
+scratch/

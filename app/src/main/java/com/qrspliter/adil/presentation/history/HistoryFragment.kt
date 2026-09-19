@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -36,6 +37,23 @@ class HistoryFragment : Fragment() {
         )
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (::adapter.isInitialized && adapter.isSelectionMode) {
+                    adapter.setSelectionMode(false)
+                    binding.layoutBulkHeader.visibility = View.GONE
+                    binding.chkSelectAll.isChecked = false
+                } else {
+                    isEnabled = false
+                    requireActivity().onBackPressedDispatcher.onBackPressed()
+                }
+            }
+        })
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -57,11 +75,18 @@ class HistoryFragment : Fragment() {
                 )
             },
             onSelectionChanged = { selectedCount ->
-                if (selectedCount > 0) {
-                    binding.btnDeleteSelected.visibility = View.VISIBLE
-                    binding.btnDeleteSelected.text = "Delete Selected ($selectedCount)"
+                if (adapter.isSelectionMode) {
+                    binding.layoutBulkHeader.visibility = View.VISIBLE
+                    if (selectedCount > 0) {
+                        binding.btnDeleteSelected.visibility = View.VISIBLE
+                        binding.btnDeleteSelected.text = "Delete Selected ($selectedCount)"
+                    } else {
+                        binding.btnDeleteSelected.visibility = View.GONE
+                    }
                 } else {
+                    binding.layoutBulkHeader.visibility = View.GONE
                     binding.btnDeleteSelected.visibility = View.GONE
+                    binding.chkSelectAll.isChecked = false
                 }
             }
         )
@@ -73,7 +98,9 @@ class HistoryFragment : Fragment() {
             if (isChecked) {
                 adapter.selectAll()
             } else {
-                adapter.clearSelection()
+                if (adapter.selectedSessionIds.size == adapter.currentList.size) {
+                    adapter.clearSelection()
+                }
             }
         }
 
@@ -85,7 +112,8 @@ class HistoryFragment : Fragment() {
                     .setMessage("Are you sure you want to delete ${selectedIds.size} selected payment sessions?")
                     .setPositiveButton("Delete") { _, _ ->
                         viewModel.deleteSelectedSessions(selectedIds)
-                        adapter.clearSelection()
+                        adapter.setSelectionMode(false)
+                        binding.layoutBulkHeader.visibility = View.GONE
                         binding.chkSelectAll.isChecked = false
                         Toast.makeText(requireContext(), "Selected sessions deleted", Toast.LENGTH_SHORT).show()
                     }
@@ -104,7 +132,6 @@ class HistoryFragment : Fragment() {
                     } else {
                         binding.layoutEmpty.visibility = View.GONE
                         binding.rvHistory.visibility = View.VISIBLE
-                        binding.layoutBulkHeader.visibility = View.VISIBLE
                         adapter.submitList(list)
 
                         // Mark sessions as read when viewed

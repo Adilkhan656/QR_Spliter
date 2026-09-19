@@ -4,18 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.qrspliter.adil.data.local.dao.NotificationDao
 import com.qrspliter.adil.data.local.dao.PaymentPartDao
 import com.qrspliter.adil.data.local.dao.PaymentSessionDao
-import com.qrspliter.adil.data.local.entity.NotificationEntity
 import com.qrspliter.adil.data.local.entity.PaymentPartEntity
 import com.qrspliter.adil.data.local.entity.PaymentSessionEntity
 
 @Database(
     entities = [
         PaymentSessionEntity::class,
-        PaymentPartEntity::class,
-        NotificationEntity::class
+        PaymentPartEntity::class
     ],
     version = 2,
     exportSchema = false
@@ -24,7 +21,6 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun paymentSessionDao(): PaymentSessionDao
     abstract fun paymentPartDao(): PaymentPartDao
-    abstract fun notificationDao(): NotificationDao
 
     companion object {
         @Volatile

@@ -78,7 +78,7 @@ class PaymentCompleteFragment : Fragment() {
                         currentSession = it
                         binding.tvTotalAmount.text = it.totalAmount.formattedRupees
                         binding.tvPaidSummary.text = "${it.paidAmount.formattedRupees} / ${it.totalAmount.formattedRupees} Paid (${it.paidPartsCount} of ${it.totalPartsCount} parts)"
-                        binding.tvSessionStatusTitle.text = "Session Status: ${it.status.name}"
+                        binding.tvSessionStatusTitle.text = "Session Status: ${it.status.displayName}"
                         adapter.submitList(it.parts)
 
                         val animRes = when (it.status) {
@@ -97,7 +97,7 @@ class PaymentCompleteFragment : Fragment() {
                             "Back to Home"
                         }
                         // Set Top App Bar Subtitle with Session Status
-                        (activity as? MainActivity)?.setToolbarSubtitle("Status: ${it.status.name}")
+                        (activity as? MainActivity)?.setToolbarSubtitle("Status: ${it.status.displayName}")
                     }
                 }
             }
