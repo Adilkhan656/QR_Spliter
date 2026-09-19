@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UPI Payment Splitter</string>
+    <string name="app_name">QR Splitter</string>
 
     <!-- Navigation Titles -->
     <string name="title_home">Home</string>
@@ -17,7 +17,7 @@
     <string name="home_secondary_history">Payment History</string>
     <string name="home_secondary_settings">Merchant Settings</string>
     <string name="home_secondary_about">About &amp; Security</string>
-    <string name="home_welcome_title">UPI Payment Splitter</string>
+    <string name="home_welcome_title">QR Splitter</string>
     <string name="home_welcome_subtitle">Split customer payments into manageable UPI transaction chunks securely on device.</string>
 
     <!-- Create Payment Screen -->
@@ -56,8 +56,8 @@
     <!-- About Screen -->
     <string name="about_disclaimer_title">Legal &amp; Regulatory Disclaimer</string>
     <string name="about_disclaimer_body">This application is an open-source technical utility for generating and managing multiple UPI payment requests. It is not a bank, payment system provider, payment service provider, or UPI application/TPAP. It does not process, hold, or settle funds. Users and merchants are responsible for complying with applicable laws, NPCI rules, bank/acquirer requirements, tax requirements, and payment-system regulations.\n\nSplitting a payment into multiple chunks does NOT imply exemption from MDR or payment system rules.</string>
-    <string name="about_security_title">Security &amp; Privacy</string>
-    <string name="about_security_body">• 100% Offline operation (no network permission required)\n• On-device local QR code generation\n• Zero banking credentials or sensitive data requested/stored\n• Cryptographically encrypted local settings via Android Keystore</string>
+    <string name="about_security_title">Security &amp; Privacy Safeguards</string>
+    <string name="about_security_body">• 100% Offline &amp; Local-First: Zero network access, zero server tracking, zero cloud data transfer. Operates completely in Airplane Mode.\n\n• Hardware-Backed Encryption: Merchant defaults and preferences are encrypted at rest using Android KeyStore (AES-256-GCM / AES-256-SIV).\n\n• Zero Runtime Permissions: Requires no Location, Contacts, Camera, SMS, Storage, or Phone permissions.\n\n• Configurable Auto-Clear Retention: History can be set to auto-clear after 1 day, 30 days, custom days, or immediately after viewing.\n\n• Zero Credentials Handled: Never requests or stores UPI PINs, OTPs, bank passwords, or payment cards.\n\n• Open Source &amp; Auditable: Transparent architecture adhering to strict least-privilege security standards.</string>
 
     <!-- Settings Screen -->
     <string name="settings_max_chunk_label">Maximum Chunk Amount (₹)</string>
