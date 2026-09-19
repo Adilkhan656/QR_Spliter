@@ -1,0 +1,32 @@
+# Built files
+*.apk
+*.aar
+*.aab
+*.dex
+*.class
+/build
+app/build
+
+# Local configuration files
+local.properties
+google-services.json
+
+# Security & Signing keys
+*.jks
+*.keystore
+*.key
+*.pem
+*.p12
+
+# Gradle files
+.gradle/
+.gradle
+gradle-app.setting
+
+# IDE files
+.idea/
+*.iml
+.DS_Store
+/captures
+.externalNativeBuild
+.cxx

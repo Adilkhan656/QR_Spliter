@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <!-- Header Card -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.QRSpliter.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lottieAnimation"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    app:lottie_autoPlay="false"
+                    app:lottie_loop="true"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvSessionStatusTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Payment Session Completed"
+                    android:textAppearance="?attr/textAppearanceTitleLarge"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvTotalAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textAppearance="?attr/textAppearanceDisplaySmall"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textStyle="bold"
+                    tools:text="₹6,000" />
+
+                <TextView
+                    android:id="@+id/tvPaidSummary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    tools:text="₹6,000 / ₹6,000 Paid (4 of 4 parts)" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Parts Breakdown List -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvParts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            tools:listitem="@layout/item_payment_part" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDone"
+            style="@style/Widget.QRSpliter.Button"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
+            android:text="Back to Home"
+            android:textColor="?attr/colorOnPrimary"
+            app:backgroundTint="?attr/colorPrimary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancelSession"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="10dp"
+            android:text="Mark Session as Cancelled / Refunded"
+            android:textColor="?attr/colorError"
+            app:cornerRadius="14dp"
+            app:strokeColor="?attr/colorError" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

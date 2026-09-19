@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Basic -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Premium Monochrome Palette -->
+    <color name="monochrome_black">#FF000000</color>
+    <color name="monochrome_off_black">#FF09090B</color>
+    <color name="monochrome_surface_dark">#FF121215</color>
+    <color name="monochrome_surface_variant_dark">#FF1C1C21</color>
+    <color name="monochrome_border_dark">#FF27272A</color>
+
+    <color name="monochrome_white">#FFFFFFFF</color>
+    <color name="monochrome_off_white">#FFF8F9FA</color>
+    <color name="monochrome_surface_light">#FFFFFFFF</color>
+    <color name="monochrome_surface_variant_light">#FFF4F4F5</color>
+    <color name="monochrome_border_light">#FFE4E4E7</color>
+
+    <!-- Grays -->
+    <color name="monochrome_gray_muted">#FF71717A</color>
+    <color name="monochrome_gray_subtle">#FFA1A1AA</color>
+    <color name="monochrome_gray_light">#FFE4E4E7</color>
+    <color name="monochrome_gray_dark">#FF27272A</color>
+
+    <!-- Semantic Status Colors -->
+    <color name="status_paid_fg">#FF10B981</color>
+    <color name="status_paid_bg">#1A10B981</color>
+    <color name="status_pending_fg">#FFF59E0B</color>
+    <color name="status_pending_bg">#1AF59E0B</color>
+    <color name="status_partially_paid_fg">#FF3B82F6</color>
+    <color name="status_partially_paid_bg">#1A3B82F6</color>
+    <color name="status_cancelled_fg">#FFE11D48</color>
+    <color name="status_cancelled_bg">#1AE11D48</color>
+</resources>

@@ -1,0 +1,36 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.QRSpliter" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Dark Theme Colors -->
+        <item name="colorPrimary">@color/monochrome_white</item>
+        <item name="colorOnPrimary">@color/monochrome_black</item>
+        <item name="colorPrimaryContainer">@color/monochrome_surface_variant_dark</item>
+        <item name="colorOnPrimaryContainer">@color/monochrome_white</item>
+        <item name="colorSecondary">@color/monochrome_gray_subtle</item>
+        <item name="colorOnSecondary">@color/monochrome_black</item>
+        <item name="colorSecondaryContainer">@color/monochrome_surface_variant_dark</item>
+        <item name="colorOnSecondaryContainer">@color/monochrome_white</item>
+        <item name="android:colorBackground">@color/monochrome_black</item>
+        <item name="colorOnBackground">@color/monochrome_white</item>
+        <item name="colorSurface">@color/monochrome_surface_dark</item>
+        <item name="colorOnSurface">@color/monochrome_white</item>
+        <item name="colorSurfaceVariant">@color/monochrome_surface_variant_dark</item>
+        <item name="colorOnSurfaceVariant">@color/monochrome_gray_subtle</item>
+        <item name="colorOutline">@color/monochrome_border_dark</item>
+        <item name="colorOutlineVariant">@color/monochrome_surface_variant_dark</item>
+        <item name="colorError">#FB7185</item>
+        <item name="colorOnError">@color/monochrome_black</item>
+
+        <!-- Status & Navigation Bar Styling -->
+        <item name="android:statusBarColor">@color/monochrome_black</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/monochrome_black</item>
+
+        <!-- Material Component Styles -->
+        <item name="materialCardViewStyle">@style/Widget.QRSpliter.Card</item>
+        <item name="materialButtonStyle">@style/Widget.QRSpliter.Button</item>
+        <item name="textInputStyle">@style/Widget.QRSpliter.TextInputLayout</item>
+    </style>
+
+    <style name="Theme.QRSpliter" parent="Base.Theme.QRSpliter" />
+</resources>

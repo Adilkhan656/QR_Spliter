@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <!-- Step Header -->
+        <TextView
+            android:id="@+id/tvStepIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textStyle="bold"
+            tools:text="PAYMENT 1 OF 4" />
+
+        <!-- Big Amount -->
+        <TextView
+            android:id="@+id/tvPartAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textAppearance="?attr/textAppearanceDisplayMedium"
+            android:textColor="?attr/colorOnSurface"
+            android:textStyle="bold"
+            tools:text="₹1,999" />
+
+        <!-- Merchant Name & VPA -->
+        <TextView
+            android:id="@+id/tvMerchantDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            tools:text="Merchant: ABC Store (merchant@upi)" />
+
+        <!-- Status Chip -->
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:clickable="false"
+            android:focusable="false"
+            app:chipCornerRadius="12dp"
+            app:chipStrokeColor="?attr/colorOutline"
+            app:chipStrokeWidth="1dp"
+            tools:text="PENDING" />
+
+        <!-- QR Code Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardQr"
+            style="@style/Widget.QRSpliter.Card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="12dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <ImageView
+                    android:id="@+id/ivQrCode"
+                    android:layout_width="260dp"
+                    android:layout_height="260dp"
+                    android:contentDescription="UPI Payment QR Code"
+                    tools:src="@android:drawable/ic_menu_camera" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Tap QR to enlarge"
+                    android:textAppearance="?attr/textAppearanceBodySmall"
+                    android:textColor="?attr/colorOnSurfaceVariant" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Live QR Timer -->
+        <TextView
+            android:id="@+id/tvQrTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?attr/colorOnSurface"
+            android:textStyle="bold"
+            tools:text="QR valid for 0:59" />
+
+        <!-- Refresh QR Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRefreshQr"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_marginBottom="12dp"
+            android:text="Refresh / Regenerate QR"
+            android:textColor="?attr/colorPrimary"
+            android:visibility="gone"
+            app:cornerRadius="12dp"
+            app:icon="@android:drawable/ic_popup_sync"
+            app:iconTint="?attr/colorPrimary"
+            app:strokeColor="?attr/colorPrimary" />
+
+        <!-- Reference -->
+        <TextView
+            android:id="@+id/tvReference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            tools:text="Ref: UPIS-20260919-7F92A31C-P1" />
+
+        <!-- Open UPI App CTA -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnOpenUpiApp"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="@string/btn_open_upi_app"
+            android:textColor="?attr/colorOnSurface"
+            app:cornerRadius="14dp"
+            app:icon="@android:drawable/ic_menu_send"
+            app:iconTint="?attr/colorOnSurface"
+            app:strokeColor="?attr/colorOutline" />
+
+        <!-- Mark as Paid CTA -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMarkAsPaid"
+            style="@style/Widget.QRSpliter.Button"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/btn_mark_as_paid"
+            android:textColor="?attr/colorOnPrimary"
+            app:backgroundTint="?attr/colorPrimary" />
+
+        <!-- Next Payment CTA -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNextPayment"
+            style="@style/Widget.QRSpliter.Button"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/btn_next_payment"
+            android:textColor="?attr/colorOnPrimary"
+            app:backgroundTint="?attr/colorPrimary" />
+
+        <!-- Previous Payment CTA -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPreviousPayment"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="10dp"
+            android:text="Previous Part QR"
+            android:textColor="?attr/colorOnSurface"
+            android:visibility="gone"
+            app:cornerRadius="14dp"
+            app:strokeColor="?attr/colorOutline" />
+
+        <!-- Cancel CTA -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancel"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="6dp"
+            android:text="@string/btn_cancel"
+            android:textColor="?attr/colorError" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

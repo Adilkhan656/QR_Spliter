@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.QRSpliter.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_create_payment"
+                    android:textAppearance="?attr/textAppearanceTitleLarge"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textStyle="bold" />
+
+                <!-- Total Amount -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilAmount"
+                    style="@style/Widget.QRSpliter.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:hint="@string/label_total_amount"
+                    app:placeholderText="@string/hint_total_amount"
+                    app:prefixText="₹ "
+                    app:prefixTextColor="?attr/colorOnSurface">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Merchant VPA -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilVpa"
+                    style="@style/Widget.QRSpliter.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:hint="@string/label_merchant_vpa"
+                    app:placeholderText="@string/hint_merchant_vpa">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etVpa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:textColor="?attr/colorOnSurface" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Merchant Name -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilMerchantName"
+                    style="@style/Widget.QRSpliter.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:hint="@string/label_merchant_name"
+                    app:placeholderText="@string/hint_merchant_name">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etMerchantName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords"
+                        android:textColor="?attr/colorOnSurface" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Reference / Invoice -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilReference"
+                    style="@style/Widget.QRSpliter.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:hint="@string/label_reference"
+                    app:placeholderText="@string/hint_reference">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etReference"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapCharacters"
+                        android:textColor="?attr/colorOnSurface" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Note -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilNote"
+                    style="@style/Widget.QRSpliter.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:hint="@string/label_note"
+                    app:placeholderText="@string/hint_note">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etNote"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:textColor="?attr/colorOnSurface" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Error text -->
+                <TextView
+                    android:id="@+id/tvErrorMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:textColor="?attr/colorError"
+                    android:visibility="gone" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSubmit"
+                    style="@style/Widget.QRSpliter.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/btn_split_and_review"
+                    android:textColor="?attr/colorOnPrimary"
+                    app:backgroundTint="?attr/colorPrimary" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

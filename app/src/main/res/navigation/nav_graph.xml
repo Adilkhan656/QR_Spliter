@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.qrspliter.adil.presentation.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_createPaymentFragment"
+            app:destination="@id/createPaymentFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_paymentDetailsFragment"
+            app:destination="@id/paymentDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createPaymentFragment"
+        android:name="com.qrspliter.adil.presentation.createpayment.CreatePaymentFragment"
+        android:label="@string/title_create_payment"
+        tools:layout="@layout/fragment_create_payment">
+        <action
+            android:id="@+id/action_createPaymentFragment_to_reviewSplitFragment"
+            app:destination="@id/reviewSplitFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/reviewSplitFragment"
+        android:name="com.qrspliter.adil.presentation.split.ReviewSplitFragment"
+        android:label="@string/title_review_split"
+        tools:layout="@layout/fragment_review_split">
+        <action
+            android:id="@+id/action_reviewSplitFragment_to_paymentQrFragment"
+            app:destination="@id/paymentQrFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/paymentQrFragment"
+        android:name="com.qrspliter.adil.presentation.qr.PaymentQrFragment"
+        android:label="@string/title_payment_qr"
+        tools:layout="@layout/fragment_payment_qr">
+        <action
+            android:id="@+id/action_paymentQrFragment_to_paymentCompleteFragment"
+            app:destination="@id/paymentCompleteFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/paymentCompleteFragment"
+        android:name="com.qrspliter.adil.presentation.complete.PaymentCompleteFragment"
+        android:label="@string/title_payment_complete"
+        tools:layout="@layout/fragment_payment_complete">
+        <action
+            android:id="@+id/action_paymentCompleteFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_paymentCompleteFragment_to_paymentDetailsFragment"
+            app:destination="@id/paymentDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.qrspliter.adil.presentation.history.HistoryFragment"
+        android:label="@string/title_history"
+        tools:layout="@layout/fragment_history">
+        <action
+            android:id="@+id/action_historyFragment_to_paymentDetailsFragment"
+            app:destination="@id/paymentDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/paymentDetailsFragment"
+        android:name="com.qrspliter.adil.presentation.details.PaymentDetailsFragment"
+        android:label="@string/title_payment_details"
+        tools:layout="@layout/fragment_payment_details">
+        <action
+            android:id="@+id/action_paymentDetailsFragment_to_paymentQrFragment"
+            app:destination="@id/paymentQrFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.qrspliter.adil.presentation.settings.SettingsFragment"
+        android:label="@string/title_settings"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.qrspliter.adil.presentation.about.AboutFragment"
+        android:label="@string/title_about"
+        tools:layout="@layout/fragment_about" />
+
+</navigation>

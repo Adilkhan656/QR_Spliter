@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.QRSpliter.Card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tvEnlargedAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceHeadlineMedium"
+            android:textColor="?attr/colorOnSurface"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/ivEnlargedQr"
+            android:layout_width="320dp"
+            android:layout_height="320dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:contentDescription="Enlarged QR Code" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCloseEnlarged"
+            style="@style/Widget.QRSpliter.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:minWidth="140dp"
+            android:text="Close"
+            android:textColor="?attr/colorOnPrimary"
+            app:backgroundTint="?attr/colorPrimary" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
