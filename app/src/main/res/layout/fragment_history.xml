@@ -53,12 +53,13 @@
         android:visibility="gone"
         tools:visibility="gone">
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:contentDescription="@string/history_empty_title"
-            android:src="@android:drawable/ic_menu_recent_history"
-            app:tint="?attr/colorOnSurfaceVariant" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieEmpty"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/empty" />
 
         <TextView
             android:layout_width="wrap_content"
