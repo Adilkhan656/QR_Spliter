@@ -22,11 +22,17 @@ interface PaymentSessionDao {
     @Query("SELECT * FROM payment_sessions ORDER BY createdAt DESC")
     fun observeAllSessions(): Flow<List<PaymentSessionEntity>>
 
-    @Query("UPDATE payment_sessions SET status = :status WHERE sessionId = :sessionId")
+    @Query("UPDATE payment_sessions SET status = :status, isRead = 0 WHERE sessionId = :sessionId")
     suspend fun updateSessionStatus(sessionId: String, status: String): Int
+
+    @Query("UPDATE payment_sessions SET isRead = 1")
+    suspend fun markAllSessionsRead(): Int
 
     @Query("DELETE FROM payment_sessions WHERE sessionId = :sessionId")
     suspend fun deleteSession(sessionId: String): Int
+
+    @Query("DELETE FROM payment_sessions WHERE sessionId IN (:sessionIds)")
+    suspend fun deleteSessions(sessionIds: List<String>): Int
 
     @Query("DELETE FROM payment_sessions WHERE createdAt < :cutoffTimestamp")
     suspend fun deleteSessionsOlderThan(cutoffTimestamp: Long): Int

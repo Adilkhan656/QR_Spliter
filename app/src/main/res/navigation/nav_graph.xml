@@ -72,6 +72,11 @@
         <action
             android:id="@+id/action_paymentCompleteFragment_to_paymentDetailsFragment"
             app:destination="@id/paymentDetailsFragment" />
+        <action
+            android:id="@+id/action_paymentCompleteFragment_to_paymentQrFragment"
+            app:destination="@id/paymentQrFragment"
+            app:popUpTo="@id/paymentCompleteFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment

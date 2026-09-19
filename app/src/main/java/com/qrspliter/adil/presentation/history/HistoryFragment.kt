@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -46,16 +48,51 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = HistoryAdapter { session ->
-            val bundle = bundleOf(CreatePaymentFragment.KEY_SESSION_ID to session.sessionId)
-            findNavController().navigate(
-                R.id.action_historyFragment_to_paymentDetailsFragment,
-                bundle
-            )
-        }
+        adapter = HistoryAdapter(
+            onItemClick = { session ->
+                val bundle = bundleOf(CreatePaymentFragment.KEY_SESSION_ID to session.sessionId)
+                findNavController().navigate(
+                    R.id.action_historyFragment_to_paymentDetailsFragment,
+                    bundle
+                )
+            },
+            onSelectionChanged = { selectedCount ->
+                if (selectedCount > 0) {
+                    binding.btnDeleteSelected.visibility = View.VISIBLE
+                    binding.btnDeleteSelected.text = "Delete Selected ($selectedCount)"
+                } else {
+                    binding.btnDeleteSelected.visibility = View.GONE
+                }
+            }
+        )
 
         binding.rvHistory.layoutManager = LinearLayoutManager(requireContext())
         binding.rvHistory.adapter = adapter
+
+        binding.chkSelectAll.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                adapter.selectAll()
+            } else {
+                adapter.clearSelection()
+            }
+        }
+
+        binding.btnDeleteSelected.setOnClickListener {
+            val selectedIds = adapter.selectedSessionIds.toList()
+            if (selectedIds.isNotEmpty()) {
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Delete Selected Sessions")
+                    .setMessage("Are you sure you want to delete ${selectedIds.size} selected payment sessions?")
+                    .setPositiveButton("Delete") { _, _ ->
+                        viewModel.deleteSelectedSessions(selectedIds)
+                        adapter.clearSelection()
+                        binding.chkSelectAll.isChecked = false
+                        Toast.makeText(requireContext(), "Selected sessions deleted", Toast.LENGTH_SHORT).show()
+                    }
+                    .setNegativeButton("Cancel", null)
+                    .show()
+            }
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -63,10 +100,15 @@ class HistoryFragment : Fragment() {
                     if (list.isEmpty()) {
                         binding.layoutEmpty.visibility = View.VISIBLE
                         binding.rvHistory.visibility = View.GONE
+                        binding.layoutBulkHeader.visibility = View.GONE
                     } else {
                         binding.layoutEmpty.visibility = View.GONE
                         binding.rvHistory.visibility = View.VISIBLE
+                        binding.layoutBulkHeader.visibility = View.VISIBLE
                         adapter.submitList(list)
+
+                        // Mark sessions as read when viewed
+                        viewModel.markAllRead()
                     }
                 }
             }

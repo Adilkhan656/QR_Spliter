@@ -3,8 +3,10 @@ package com.qrspliter.adil.core.util
 import android.content.Context
 import com.qrspliter.adil.core.security.SecurityPreferences
 import com.qrspliter.adil.data.local.database.AppDatabase
+import com.qrspliter.adil.data.repository.NotificationRepositoryImpl
 import com.qrspliter.adil.data.repository.PaymentRepositoryImpl
 import com.qrspliter.adil.data.repository.SettingsRepositoryImpl
+import com.qrspliter.adil.domain.repository.NotificationRepository
 import com.qrspliter.adil.domain.repository.PaymentRepository
 import com.qrspliter.adil.domain.repository.SettingsRepository
 import com.qrspliter.adil.domain.usecase.CreatePaymentSessionUseCase
@@ -19,8 +21,12 @@ class AppContainer(context: Context) {
         AppDatabase.getDatabase(context)
     }
 
-    private val securityPreferences: SecurityPreferences by lazy {
+    val securityPreferences: SecurityPreferences by lazy {
         SecurityPreferences(context)
+    }
+
+    val notificationRepository: NotificationRepository by lazy {
+        NotificationRepositoryImpl(database.notificationDao())
     }
 
     val paymentRepository: PaymentRepository by lazy {
@@ -47,7 +53,7 @@ class AppContainer(context: Context) {
     }
 
     val updatePaymentPartStatusUseCase: UpdatePaymentPartStatusUseCase by lazy {
-        UpdatePaymentPartStatusUseCase(paymentRepository)
+        UpdatePaymentPartStatusUseCase(paymentRepository, notificationRepository)
     }
 
     val saveSettingsUseCase: SaveSettingsUseCase by lazy {

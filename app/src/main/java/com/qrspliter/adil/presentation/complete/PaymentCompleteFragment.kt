@@ -50,7 +50,7 @@ class PaymentCompleteFragment : Fragment() {
 
         requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                navigateNext()
+                handleBackNavigation()
             }
         })
     }
@@ -81,15 +81,20 @@ class PaymentCompleteFragment : Fragment() {
                         binding.tvSessionStatusTitle.text = "Session Status: ${it.status.name}"
                         adapter.submitList(it.parts)
 
-                        val animRes = if (it.status == PaymentSessionStatus.PAID) {
-                            R.raw.success_animation
-                        } else {
-                            R.raw.pending_animation
+                        val animRes = when (it.status) {
+                            PaymentSessionStatus.PAID -> R.raw.success_animation
+                            PaymentSessionStatus.CANCELLED -> R.raw.failed
+                            else -> R.raw.pending_animation
                         }
                         binding.lottieAnimation.apply {
                             cancelAnimation()
                             setAnimation(animRes)
                             playAnimation()
+                        }
+                        binding.btnDone.text = if (it.isResumable) {
+                            "Resume latest QR"
+                        } else {
+                            "Back to Home"
                         }
                         // Set Top App Bar Subtitle with Session Status
                         (activity as? MainActivity)?.setToolbarSubtitle("Status: ${it.status.name}")
@@ -109,19 +114,23 @@ class PaymentCompleteFragment : Fragment() {
 
     private fun navigateNext() {
         val session = currentSession
-        if (session != null && (session.status == PaymentSessionStatus.PENDING || session.status == PaymentSessionStatus.PARTIALLY_PAID)) {
+        if (session != null && session.isResumable) {
             val lastPartIndex = (session.parts.size - 1).coerceAtLeast(0)
             val bundle = bundleOf(
                 CreatePaymentFragment.KEY_SESSION_ID to session.sessionId,
                 ReviewSplitFragment.KEY_PART_INDEX to lastPartIndex
             )
             findNavController().navigate(
-                R.id.action_paymentCompleteFragment_to_paymentDetailsFragment,
+                R.id.action_paymentCompleteFragment_to_paymentQrFragment,
                 bundle
             )
         } else {
             findNavController().navigate(R.id.action_paymentCompleteFragment_to_homeFragment)
         }
+    }
+
+    fun handleBackNavigation() {
+        navigateNext()
     }
 
     private fun showCancelConfirmation() {
@@ -140,4 +149,7 @@ class PaymentCompleteFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    private val PaymentSession.isResumable: Boolean
+        get() = status == PaymentSessionStatus.PENDING || status == PaymentSessionStatus.PARTIALLY_PAID
 }

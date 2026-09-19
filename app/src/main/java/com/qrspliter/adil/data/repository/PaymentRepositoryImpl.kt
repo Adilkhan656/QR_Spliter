@@ -76,6 +76,16 @@ class PaymentRepositoryImpl(
         sessionDao.deleteSession(sessionId)
     }
 
+    override suspend fun deleteSessions(sessionIds: List<String>) {
+        if (sessionIds.isNotEmpty()) {
+            sessionDao.deleteSessions(sessionIds)
+        }
+    }
+
+    override suspend fun markAllSessionsRead() {
+        sessionDao.markAllSessionsRead()
+    }
+
     override suspend fun cleanupExpiredSessions(policy: DataRetentionPolicy, customDays: Int): Int {
         val now = System.currentTimeMillis()
         val dayInMillis = 24 * 60 * 60 * 1000L

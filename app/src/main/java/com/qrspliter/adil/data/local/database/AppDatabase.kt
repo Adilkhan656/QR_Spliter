@@ -4,23 +4,27 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.qrspliter.adil.data.local.dao.NotificationDao
 import com.qrspliter.adil.data.local.dao.PaymentPartDao
 import com.qrspliter.adil.data.local.dao.PaymentSessionDao
+import com.qrspliter.adil.data.local.entity.NotificationEntity
 import com.qrspliter.adil.data.local.entity.PaymentPartEntity
 import com.qrspliter.adil.data.local.entity.PaymentSessionEntity
 
 @Database(
     entities = [
         PaymentSessionEntity::class,
-        PaymentPartEntity::class
+        PaymentPartEntity::class,
+        NotificationEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun paymentSessionDao(): PaymentSessionDao
     abstract fun paymentPartDao(): PaymentPartDao
+    abstract fun notificationDao(): NotificationDao
 
     companion object {
         @Volatile
@@ -32,7 +36,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "upi_payment_splitter.db"
-                ).build()
+                )
+                .fallbackToDestructiveMigration()
+                .build()
                 INSTANCE = instance
                 instance
             }

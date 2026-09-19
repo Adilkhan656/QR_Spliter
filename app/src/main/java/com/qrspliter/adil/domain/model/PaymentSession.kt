@@ -9,7 +9,8 @@ data class PaymentSession(
     val note: String? = null,
     val createdAt: Long = System.currentTimeMillis(),
     val status: PaymentSessionStatus = PaymentSessionStatus.PENDING,
-    val parts: List<PaymentPart> = emptyList()
+    val parts: List<PaymentPart> = emptyList(),
+    val isRead: Boolean = false
 ) {
     val paidAmount: Money
         get() = Money(parts.filter {

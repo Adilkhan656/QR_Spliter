@@ -16,6 +16,8 @@ interface PaymentRepository {
         paidAt: Long? = System.currentTimeMillis()
     )
     suspend fun deletePaymentSession(sessionId: String)
+    suspend fun deleteSessions(sessionIds: List<String>)
+    suspend fun markAllSessionsRead()
     suspend fun cleanupExpiredSessions(policy: DataRetentionPolicy, customDays: Int = 1): Int
     suspend fun clearAllHistory(): Int
 }

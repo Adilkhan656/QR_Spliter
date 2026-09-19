@@ -30,7 +30,8 @@ object PaymentMapper {
             note = entity.note,
             createdAt = entity.createdAt,
             status = sessionStatus,
-            parts = parts
+            parts = parts,
+            isRead = entity.isRead
         )
     }
 
@@ -43,7 +44,8 @@ object PaymentMapper {
             referenceId = domain.referenceId,
             note = domain.note,
             status = domain.status.name,
-            createdAt = domain.createdAt
+            createdAt = domain.createdAt,
+            isRead = domain.isRead
         )
     }
 

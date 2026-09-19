@@ -33,6 +33,18 @@ class HistoryViewModel(
         }
     }
 
+    fun markAllRead() {
+        viewModelScope.launch {
+            paymentRepository.markAllSessionsRead()
+        }
+    }
+
+    fun deleteSelectedSessions(sessionIds: List<String>) {
+        viewModelScope.launch {
+            paymentRepository.deleteSessions(sessionIds)
+        }
+    }
+
     fun onHistoryViewClosed() {
         viewModelScope.launch {
             val policy = settingsRepository.getDataRetentionPolicy()

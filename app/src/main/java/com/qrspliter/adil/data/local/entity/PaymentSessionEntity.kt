@@ -22,5 +22,6 @@ data class PaymentSessionEntity(
     val referenceId: String,
     val note: String?,
     val status: String,
-    val createdAt: Long
+    val createdAt: Long,
+    val isRead: Boolean = false
 )

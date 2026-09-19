@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.qrspliter.adil.R
 import com.qrspliter.adil.UpiSplitterApplication
 import com.qrspliter.adil.databinding.FragmentSettingsBinding
 import com.qrspliter.adil.domain.model.DataRetentionPolicy
@@ -128,10 +129,11 @@ class SettingsFragment : Fragment() {
         val policies = DataRetentionPolicy.entries
         val adapter = ArrayAdapter(
             requireContext(),
-            android.R.layout.simple_dropdown_item_1line,
+            R.layout.item_dropdown_monochrome,
             policies.map { it.displayName }
         )
 
+        binding.actRetentionPolicy.setDropDownBackgroundResource(R.drawable.bg_dropdown_popup)
         binding.actRetentionPolicy.setAdapter(adapter)
         binding.actRetentionPolicy.setOnItemClickListener { _, _, position, _ ->
             selectedRetentionPolicy = policies[position]
@@ -143,10 +145,11 @@ class SettingsFragment : Fragment() {
         val policies = MarkAsPaidConfirmationPolicy.entries
         val adapter = ArrayAdapter(
             requireContext(),
-            android.R.layout.simple_dropdown_item_1line,
+            R.layout.item_dropdown_monochrome,
             policies.map { it.displayName }
         )
 
+        binding.actConfirmationPolicy.setDropDownBackgroundResource(R.drawable.bg_dropdown_popup)
         binding.actConfirmationPolicy.setAdapter(adapter)
         binding.actConfirmationPolicy.setOnItemClickListener { _, _, position, _ ->
             selectedConfirmationPolicy = policies[position]
